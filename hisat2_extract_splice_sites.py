@@ -79,7 +79,7 @@ def extract_splice_sites(gtf_file, verbose=False):
     for chrom, strand, exons in trans.values():
         for i in range(0, len(exons)-1):
             for j in range(i + 1, len(exons)):
-                junctions.add((chrom, exons[i][1], exons[j][0], strand))    
+                junctions.add((chrom, exons[i][1] - 1, exons[j][0] + 2, strand))    
     junctions = sorted(junctions)
     for chrom, left, right, strand in junctions:
         # Zero-based offset
