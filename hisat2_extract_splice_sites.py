@@ -77,8 +77,9 @@ def extract_splice_sites(gtf_file, verbose=False):
     # Calculate and print the unique junctions
     junctions = set()
     for chrom, strand, exons in trans.values():
-        for i in range(1, len(exons)):
-            junctions.add((chrom, exons[i-1][1], exons[i][0], strand))
+        for i in range(0, len(exons)-1):
+            for j in range(1, len(exons)):
+                junctions.add((chrom, exons[i][1], exons[j][0], strand))    
     junctions = sorted(junctions)
     for chrom, left, right, strand in junctions:
         # Zero-based offset
